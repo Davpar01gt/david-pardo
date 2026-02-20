@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>David Pardo | Marca Personal</title>
+  <meta name="description" content="Marca personal de David Pardo: Home, Sobre mí, Portafolio, Blog y Contacto." />
+
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --panel:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --brand:#60a5fa;
+      --brand2:#a78bfa;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 12px 28px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Tahoma, Helvetica, Arial, system-ui;
+      background:
+        radial-gradient(900px 520px at 10% 0%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(900px 520px at 90% 10%, rgba(167,139,250,.14), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    .container{width:min(1100px,92vw);margin:0 auto}
+    a{color:inherit;text-decoration:none}
+
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      background:rgba(11,15,25,.78);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 0; gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; cursor:pointer; user-select:none;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+    }
+    .menu{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .menu a{
+      padding:8px 10px; border-radius:12px;
+      color:var(--muted);
+      border:1px solid transparent;
+      cursor:pointer; user-select:none;
+    }
+    .menu a:hover,
+    .menu a.active{
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      border-color:var(--border);
+    }
+
+    /* PAGES */
+    .page{display:none}
+    .page.active{display:block}
+
+    /* LAYOUT */
+    .hero{padding:56px 0 24px}
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media(max-width:860px){
+      .grid{grid-template-columns:1fr}
+    }
+    .section{padding:0 0 44px}
+
+    .card{
+      background:rgba(17,24,39,.86);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+
+    /* TITULO PEQUEÑO (kicker) — lo dejamos definido por si lo necesitas en otras secciones,
+       pero en HOME ya NO lo mostramos. */
+    .kicker{
+      font-size:12px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+
+    h1,h2,h3{margin:0 0 12px}
+    h1{font-size:34px; line-height:1.15}
+    h2{font-size:22px}
+    h3{font-size:18px}
+    p{margin:0 0 12px; color:var(--muted)}
+
+    /* HOME */
+    .name{
+      font-size:32px;
+      font-weight:800;
+      margin:0 0 14px;
+    }
+    .phrase{
+      font-size:22px;
+      line-height:1.45;
+      max-width:720px;
+      color:var(--text);
+      margin:0;
+    }
+    .home-logo-wrap{
+      margin-top:44px;
+      display:flex;
+      justify-content:center;
+    }
+    .home-logo{
+      max-width:320px;
+      width:100%;
+      height:auto;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+
+    /* FOTO */
+    .photo{
+      width:100%;
+      height:360px;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      overflow:hidden;
+      background:rgba(255,255,255,.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:12px;
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* LISTS */
+    .cols{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    @media(max-width:860px){
+      .cols{grid-template-columns:1fr}
+    }
+    ul{margin:0; padding-left:18px; color:var(--muted)}
+    li{margin:8px 0}
+
+    /* BLOG */
+    .meta{font-size:14px; color:var(--muted); margin:0 0 10px}
+    .blog strong{color:var(--text)}
+    .divider{border:0; border-top:1px solid var(--border); margin:18px 0}
+
+    /* CONTACT (demo) */
+    label{display:block; margin:10px 0 6px; color:var(--text); font-size:14px}
+    input, textarea{
+      width:100%;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      outline:none;
+    }
+    textarea{min-height:120px; resize:vertical}
+    .btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      cursor:pointer;
+      margin-top:12px;
+    }
+
+    footer{
+      margin-top:60px;
+      padding:20px 0;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      text-align:center;
+      font-size:14px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand" onclick="showPage('home')">
+        <span class="dot"></span>
+        <span>David Pardo</span>
+      </div>
+
+      <nav class="menu" aria-label="Menú principal">
+        <a class="navlink active" onclick="showPage('home')">Home</a>
+        <a class="navlink" onclick="showPage('sobre')">Sobre mí</a>
+        <a class="navlink" onclick="showPage('portafolio')">Portafolio</a>
+        <a class="navlink" onclick="showPage('blog')">Blog</a>
+        <a class="navlink" onclick="showPage('contacto')">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HOME -->
+    <section id="home" class="page active" aria-label="Home">
+      <div class="hero">
+        <div class="grid">
+
+          <div class="card">
+            <!-- ✅ QUITADO: BIENVENIDA -->
+            <div class="name">David Pardo</div>
+
+            <p class="phrase">
+              Creo en las personas, en el trabajo bien hecho y en construir relaciones basadas en confianza, respeto y empatía.
+            </p>
+
+            <div class="home-logo-wrap">
+              <img src="logo.png" alt="Logo de David Pardo" class="home-logo">
+            </div>
+          </div>
+
+          <div class="card">
+            <!-- ✅ QUITADO: FOTOGRAFÍA PERSONAL -->
+            <div class="photo">
+              <img src="foto.jpg" alt="Foto personal de David Pardo">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE MÍ (COMPLETO) -->
+    <section id="sobre" class="page" aria-label="Sobre mí">
+      <div class="hero">
+        <div class="card">
+          <div class="kicker">Sobre mí</div>
+          <h1>Mi marca personal: cercanía humana con liderazgo responsable.</h1>
+
+          <p>
+            Quiero que me perciban como una persona confiable, empática y cercana, que cuida a su equipo y apoya a los demás,
+            pero que al mismo tiempo es responsable, profesional y capaz de liderar con orden, visión y compromiso.
+          </p>
+
+          <p>
+            Mis arquetipos son <strong>Cuidador</strong> y <strong>Gobernante</strong>. El Cuidador se refleja en mi forma de escuchar, apoyar y
+            generar confianza. El Gobernante se refleja en mi disciplina, mi necesidad de orden y mi enfoque en resultados sin perder el lado humano.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="cols">
+          <div class="card">
+            <h2>Habilidades</h2>
+            <ul>
+              <li>Comunicación empática</li>
+              <li>Trabajo en equipo</li>
+              <li>Liderazgo responsable</li>
+              <li>Organización y planificación</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h2>Fortalezas</h2>
+            <ul>
+              <li>Empatía genuina</li>
+              <li>Honestidad</li>
+              <li>Lealtad</li>
+              <li>Responsabilidad</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="height:16px"></div>
+
+        <div class="card">
+          <h2>Cómo actúo en situaciones reales</h2>
+          <ul>
+            <li>En momentos de crisis con gente que quiero y apoyo, soy el último en perder la cabeza y en abandonar el barco.</li>
+            <li>Me definen la empatía y la lealtad: para mí, la confianza se construye y se protege.</li>
+            <li>Escucho, me organizo y apoyo en todo lo que haga falta para que el equipo avance.</li>
+            <li>Comprendo a las personas y sé cómo actuar con cada una para apoyarlas y ganarme su atención.</li>
+            <li>Soy responsable, calmado y trabajador; considero varias ideas y sé trabajar en equipo.</li>
+          </ul>
+        </div>
+
+        <div style="height:16px"></div>
+
+        <div class="card">
+          <h2>Mi propuesta profesional</h2>
+          <p>
+            Ofrezco una forma de trabajo basada en valores, compromiso y responsabilidad, enfocada en generar confianza y relaciones sólidas a largo plazo.
+            Busco aportar soluciones con una visión humana y profesional, trabajando con disciplina, respeto y orientación al éxito.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTAFOLIO -->
+    <section id="portafolio" class="page" aria-label="Portafolio">
+      <div class="hero">
+        <div class="card">
+          <div class="kicker">Portafolio</div>
+          <h1>Portafolio</h1>
+          <p>
+            Esta sección está visible en el menú según la estructura requerida. En futuras entregas incluiré proyectos, trabajos y resultados relevantes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG (COMPLETO) -->
+    <section id="blog" class="page blog" aria-label="Blog">
+      <div class="hero">
+        <div class="card">
+          <div class="kicker">Blog</div>
+          <h1>Cómo soy como marca</h1>
+          <p class="meta">David Pardo · <span id="today"></span></p>
+
+          <p>
+            Mi marca personal se construye a partir de una idea simple: <strong>crecer profesionalmente sin dejar de ser humano</strong>.
+            Para mí, la forma en la que trato a las personas, cómo respondo bajo presión y cómo sostengo la confianza en equipo es lo que define mi reputación.
+          </p>
+
+          <p>
+            Mis arquetipos son <strong>Cuidador</strong> y <strong>Gobernante</strong>. Como Cuidador, me importa el bienestar del equipo:
+            escucho, apoyo y busco generar un ambiente donde la gente se sienta valorada. Como Gobernante, me enfoco en el orden, la planificación y la responsabilidad:
+            me gusta trabajar con estructura, claridad y metas, cuidando el proceso sin descuidar los resultados.
+          </p>
+
+          <p>
+            Actualmente estudio <strong>Ingeniería Industrial en la Universidad del Valle de Guatemala</strong>. Me interesa fortalecer mi perfil con una visión estratégica,
+            por lo que al graduarme planeo estudiar una <strong>maestría en Finanzas</strong>. Considero que esa combinación me permitirá tomar decisiones con mayor criterio,
+            analizar mejor los recursos y contribuir con soluciones que sean humanas, eficientes y sostenibles.
+          </p>
+
+          <p>
+            En situaciones de crisis, especialmente cuando se trata de personas que aprecio y apoyo, suelo mantener la calma. Soy el último en perder la cabeza y en abandonar el barco.
+            Prefiero escuchar, ordenar ideas, evaluar opciones y aportar claridad para que el equipo avance. Esa forma de actuar es parte central de cómo quiero que se recuerde mi marca:
+            confiable, leal y enfocada en soluciones.
+          </p>
+
+          <p>
+            También creo que una marca se demuestra con consistencia. Por eso intento ser responsable, trabajador y abierto a distintas ideas. Me tomo en serio el trabajo en equipo
+            y me esfuerzo por aportar organización, apoyo y criterio. Mi objetivo es que la gente vea en mí a alguien con valores, compromiso y capacidad de liderazgo.
+          </p>
+
+          <hr class="divider">
+
+          <p>
+            En resumen, quiero que mi marca combine dos cosas: <strong>cercanía</strong> (confianza, empatía y apoyo real) y <strong>dirección</strong>
+            (orden, visión, responsabilidad y resultados).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="page" aria-label="Contacto">
+      <div class="hero">
+        <div class="card">
+          <div class="kicker">Contacto</div>
+          <h1>Contacto</h1>
+          <p>
+            Esta sección está visible en el menú según la estructura requerida. En el futuro puedo integrar un formulario real o enlaces de contacto.
+          </p>
+
+          <form onsubmit="return fakeSubmit(event)">
+            <label for="name">Nombre</label>
+            <input id="name" name="name" type="text" placeholder="Tu nombre" required>
+
+            <label for="email">Correo</label>
+            <input id="email" name="email" type="email" placeholder="tu@correo.com" required>
+
+            <label for="msg">Mensaje</label>
+            <textarea id="msg" name="msg" placeholder="Escribe tu mensaje..." required></textarea>
+
+            <button class="btn" type="submit">Enviar</button>
+            <div id="formHint" style="display:none; margin-top:10px; color:var(--muted); font-size:13px;">
+              Formulario demostrativo (no envía correos).
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> David Pardo
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const fmt = new Intl.DateTimeFormat("es-ES", { year:"numeric", month:"long", day:"2-digit" });
+    document.getElementById("today").textContent = fmt.format(new Date());
+
+    function showPage(id){
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      const target = document.getElementById(id);
+      if(target) target.classList.add("active");
+
+      const links = document.querySelectorAll(".menu .navlink");
+      links.forEach(a => a.classList.remove("active"));
+
+      const ids = ["home","sobre","portafolio","blog","contacto"];
+      const idx = ids.indexOf(id);
+      if(idx >= 0) links[idx].classList.add("active");
+
+      window.scrollTo(0,0);
+    }
+
+    function fakeSubmit(e){
+      e.preventDefault();
+      document.getElementById("formHint").style.display = "block";
+      return false;
+    }
+  </script>
+</body>
+</html>
