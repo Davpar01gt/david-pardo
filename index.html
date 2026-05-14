@@ -1,445 +1,772 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>David Pardo | Marca Personal</title>
-  <meta name="description" content="Marca personal de David Pardo: Home, Sobre mí, Portafolio, Blog y Contacto." />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    :root{
-      --bg:#0b0f19;
-      --panel:#111827;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --brand:#60a5fa;
-      --brand2:#a78bfa;
-      --border:rgba(255,255,255,.10);
-      --shadow:0 12px 28px rgba(0,0,0,.35);
-      --radius:18px;
-    }
+<title>David Pardo | Marca Personal</title>
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Tahoma, Helvetica, Arial, system-ui;
-      background:
-        radial-gradient(900px 520px at 10% 0%, rgba(96,165,250,.18), transparent 60%),
-        radial-gradient(900px 520px at 90% 10%, rgba(167,139,250,.14), transparent 55%),
-        var(--bg);
-      color:var(--text);
-      line-height:1.55;
-    }
+<style>
 
-    .container{width:min(1100px,92vw);margin:0 auto}
-    a{color:inherit;text-decoration:none}
+:root{
+--bg:#0b0f19;
+--panel:#111827;
+--text:#e5e7eb;
+--muted:#9ca3af;
+--brand:#60a5fa;
+--brand2:#a78bfa;
+--border:rgba(255,255,255,.10);
+--shadow:0 12px 28px rgba(0,0,0,.35);
+--radius:18px;
+}
 
-    /* NAV */
-    .nav{
-      position:sticky; top:0; z-index:50;
-      background:rgba(11,15,25,.78);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--border);
-    }
-    .nav-inner{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:14px 0; gap:16px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800; cursor:pointer; user-select:none;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background:linear-gradient(135deg,var(--brand),var(--brand2));
-    }
-    .menu{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
-    .menu a{
-      padding:8px 10px; border-radius:12px;
-      color:var(--muted);
-      border:1px solid transparent;
-      cursor:pointer; user-select:none;
-    }
-    .menu a:hover,
-    .menu a.active{
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      border-color:var(--border);
-    }
+*{
+box-sizing:border-box;
+}
 
-    /* PAGES */
-    .page{display:none}
-    .page.active{display:block}
+html{
+scroll-behavior:smooth;
+}
 
-    /* LAYOUT */
-    .hero{padding:56px 0 24px}
-    .grid{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:22px;
-      align-items:stretch;
-    }
-    @media(max-width:860px){
-      .grid{grid-template-columns:1fr}
-    }
-    .section{padding:0 0 44px}
+body{
+margin:0;
+font-family:Tahoma, Helvetica, Arial, sans-serif;
+background:
+radial-gradient(900px 520px at 10% 0%, rgba(96,165,250,.18), transparent 60%),
+radial-gradient(900px 520px at 90% 10%, rgba(167,139,250,.14), transparent 55%),
+var(--bg);
+color:var(--text);
+line-height:1.6;
+}
 
-    .card{
-      background:rgba(17,24,39,.86);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:28px;
-      box-shadow:var(--shadow);
-    }
+.container{
+width:min(1150px,92vw);
+margin:0 auto;
+}
 
-    /* TITULO PEQUEÑO (kicker) — lo dejamos definido por si lo necesitas en otras secciones,
-       pero en HOME ya NO lo mostramos. */
-    .kicker{
-      font-size:12px;
-      letter-spacing:.15em;
-      text-transform:uppercase;
-      color:var(--muted);
-      margin-bottom:10px;
-    }
+a{
+text-decoration:none;
+color:inherit;
+}
 
-    h1,h2,h3{margin:0 0 12px}
-    h1{font-size:34px; line-height:1.15}
-    h2{font-size:22px}
-    h3{font-size:18px}
-    p{margin:0 0 12px; color:var(--muted)}
+.nav{
+position:sticky;
+top:0;
+z-index:999;
+background:rgba(11,15,25,.85);
+backdrop-filter:blur(10px);
+border-bottom:1px solid var(--border);
+}
 
-    /* HOME */
-    .name{
-      font-size:32px;
-      font-weight:800;
-      margin:0 0 14px;
-    }
-    .phrase{
-      font-size:22px;
-      line-height:1.45;
-      max-width:720px;
-      color:var(--text);
-      margin:0;
-    }
-    .home-logo-wrap{
-      margin-top:44px;
-      display:flex;
-      justify-content:center;
-    }
-    .home-logo{
-      max-width:320px;
-      width:100%;
-      height:auto;
-      filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));
-    }
+.nav-inner{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 0;
+}
 
-    /* FOTO */
-    .photo{
-      width:100%;
-      height:360px;
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      overflow:hidden;
-      background:rgba(255,255,255,.04);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:12px;
-    }
-    .photo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
+.brand{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:800;
+cursor:pointer;
+}
 
-    /* LISTS */
-    .cols{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-    @media(max-width:860px){
-      .cols{grid-template-columns:1fr}
-    }
-    ul{margin:0; padding-left:18px; color:var(--muted)}
-    li{margin:8px 0}
+.dot{
+width:10px;
+height:10px;
+border-radius:100%;
+background:linear-gradient(135deg,var(--brand),var(--brand2));
+}
 
-    /* BLOG */
-    .meta{font-size:14px; color:var(--muted); margin:0 0 10px}
-    .blog strong{color:var(--text)}
-    .divider{border:0; border-top:1px solid var(--border); margin:18px 0}
+.menu{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
 
-    /* CONTACT (demo) */
-    label{display:block; margin:10px 0 6px; color:var(--text); font-size:14px}
-    input, textarea{
-      width:100%;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      outline:none;
-    }
-    textarea{min-height:120px; resize:vertical}
-    .btn{
-      display:inline-block;
-      padding:10px 14px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      cursor:pointer;
-      margin-top:12px;
-    }
+.menu a{
+padding:8px 12px;
+border-radius:12px;
+color:var(--muted);
+transition:.25s;
+cursor:pointer;
+}
 
-    footer{
-      margin-top:60px;
-      padding:20px 0;
-      border-top:1px solid var(--border);
-      color:var(--muted);
-      text-align:center;
-      font-size:14px;
-    }
-  </style>
+.menu a:hover,
+.menu a.active{
+background:rgba(255,255,255,.06);
+color:var(--text);
+}
+
+.page{
+display:none;
+padding:60px 0;
+}
+
+.page.active{
+display:block;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:22px;
+}
+
+@media(max-width:900px){
+.grid{
+grid-template-columns:1fr;
+}
+}
+
+.card{
+background:rgba(17,24,39,.88);
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:30px;
+box-shadow:var(--shadow);
+}
+
+.name{
+font-size:38px;
+font-weight:800;
+margin-bottom:14px;
+}
+
+.phrase{
+font-size:22px;
+line-height:1.5;
+margin-bottom:24px;
+}
+
+.expertise{
+color:var(--muted);
+font-size:16px;
+line-height:1.7;
+}
+
+.home-logo-wrap{
+margin-top:40px;
+display:flex;
+justify-content:center;
+}
+
+.home-logo{
+width:100%;
+max-width:320px;
+}
+
+.photo{
+height:420px;
+overflow:hidden;
+border-radius:var(--radius);
+border:1px solid var(--border);
+}
+
+.photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.kicker{
+font-size:12px;
+text-transform:uppercase;
+letter-spacing:.18em;
+color:var(--muted);
+margin-bottom:12px;
+}
+
+h1{
+font-size:34px;
+margin:0 0 18px;
+}
+
+h2{
+font-size:24px;
+margin-bottom:14px;
+}
+
+p{
+color:var(--muted);
+}
+
+.cols{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+margin-top:18px;
+}
+
+@media(max-width:900px){
+.cols{
+grid-template-columns:1fr;
+}
+}
+
+ul{
+padding-left:20px;
+color:var(--muted);
+}
+
+li{
+margin:10px 0;
+}
+
+.video-box{
+margin-top:30px;
+}
+
+.video-box video{
+width:100%;
+border-radius:16px;
+border:1px solid var(--border);
+}
+
+.cv-section{
+margin-top:28px;
+}
+
+.cv-box{
+display:flex;
+gap:24px;
+align-items:center;
+flex-wrap:wrap;
+background:rgba(255,255,255,.03);
+padding:22px;
+border-radius:18px;
+border:1px solid var(--border);
+}
+
+.cv-photo{
+width:130px;
+height:130px;
+border-radius:18px;
+overflow:hidden;
+flex-shrink:0;
+}
+
+.cv-photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.cv-info h3{
+margin:0 0 10px;
+font-size:24px;
+}
+
+.cv-btn{
+display:inline-block;
+margin-top:14px;
+padding:12px 18px;
+border-radius:14px;
+background:linear-gradient(135deg,var(--brand),var(--brand2));
+color:white;
+font-weight:700;
+}
+
+.portfolio-grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:22px;
+margin-top:25px;
+}
+
+@media(max-width:1000px){
+.portfolio-grid{
+grid-template-columns:1fr;
+}
+}
+
+.project-card{
+background:rgba(17,24,39,.88);
+border:1px solid var(--border);
+border-radius:20px;
+overflow:hidden;
+box-shadow:var(--shadow);
+transition:.3s;
+}
+
+.project-card:hover{
+transform:translateY(-6px);
+}
+
+.project-img{
+height:220px;
+overflow:hidden;
+}
+
+.project-img img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.project-content{
+padding:24px;
+}
+
+.tag{
+display:inline-block;
+padding:6px 10px;
+background:rgba(96,165,250,.12);
+border:1px solid rgba(96,165,250,.2);
+border-radius:999px;
+font-size:12px;
+margin-bottom:14px;
+color:#8ab4ff;
+}
+
+.project-content h3{
+margin-top:0;
+}
+
+.project-content p{
+font-size:15px;
+line-height:1.7;
+}
+
+.contact-box{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:22px;
+margin-top:20px;
+}
+
+@media(max-width:900px){
+.contact-box{
+grid-template-columns:1fr;
+}
+}
+
+.contact-card{
+background:rgba(255,255,255,.03);
+border:1px solid var(--border);
+padding:24px;
+border-radius:18px;
+}
+
+.contact-card a{
+color:#8ab4ff;
+}
+
+.contact-photo{
+height:100%;
+overflow:hidden;
+border-radius:18px;
+}
+
+.contact-photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.call{
+font-size:18px;
+line-height:1.7;
+}
+
+footer{
+margin-top:40px;
+padding:24px;
+text-align:center;
+color:var(--muted);
+border-top:1px solid var(--border);
+}
+
+.blog a{
+color:#8ab4ff;
+text-decoration:underline;
+}
+
+</style>
 </head>
 
 <body>
-  <header class="nav">
-    <div class="container nav-inner">
-      <div class="brand" onclick="showPage('home')">
-        <span class="dot"></span>
-        <span>David Pardo</span>
-      </div>
 
-      <nav class="menu" aria-label="Menú principal">
-        <a class="navlink active" onclick="showPage('home')">Home</a>
-        <a class="navlink" onclick="showPage('sobre')">Sobre mí</a>
-        <a class="navlink" onclick="showPage('portafolio')">Portafolio</a>
-        <a class="navlink" onclick="showPage('blog')">Blog</a>
-        <a class="navlink" onclick="showPage('contacto')">Contacto</a>
-      </nav>
-    </div>
-  </header>
+<header class="nav">
+<div class="container nav-inner">
 
-  <main class="container">
+<div class="brand" onclick="showPage('home')">
+<div class="dot"></div>
+<div>David Pardo</div>
+</div>
 
-    <!-- HOME -->
-    <section id="home" class="page active" aria-label="Home">
-      <div class="hero">
-        <div class="grid">
+<nav class="menu">
+<a class="navlink active" onclick="showPage('home')">Home</a>
+<a class="navlink" onclick="showPage('sobre')">Sobre mí</a>
+<a class="navlink" onclick="showPage('portafolio')">Portafolio</a>
+<a class="navlink" onclick="showPage('blog')">Blog</a>
+<a class="navlink" onclick="showPage('contacto')">Contacto</a>
+</nav>
 
-          <div class="card">
-            <!-- ✅ QUITADO: BIENVENIDA -->
-            <div class="name">David Pardo</div>
+</div>
+</header>
 
-            <p class="phrase">
-              Creo en las personas, en el trabajo bien hecho y en construir relaciones basadas en confianza, respeto y empatía.
-            </p>
+<main class="container">
 
-            <div class="home-logo-wrap">
-              <img src="logo.png" alt="Logo de David Pardo" class="home-logo">
-            </div>
-          </div>
+<section id="home" class="page active">
 
-          <div class="card">
-            <!-- ✅ QUITADO: FOTOGRAFÍA PERSONAL -->
-            <div class="photo">
-              <img src="foto.jpg" alt="Foto personal de David Pardo">
-            </div>
-          </div>
+<div class="grid">
 
-        </div>
-      </div>
-    </section>
+<div class="card">
 
-    <!-- SOBRE MÍ (COMPLETO) -->
-    <section id="sobre" class="page" aria-label="Sobre mí">
-      <div class="hero">
-        <div class="card">
-          <div class="kicker">Sobre mí</div>
-          <h1>Mi marca personal: cercanía humana con liderazgo responsable.</h1>
+<div class="name">David Pardo</div>
 
-          <p>
-            Quiero que me perciban como una persona confiable, empática y cercana, que cuida a su equipo y apoya a los demás,
-            pero que al mismo tiempo es responsable, profesional y capaz de liderar con orden, visión y compromiso.
-          </p>
+<p class="phrase">
+Creo en las personas, en el trabajo bien hecho y en construir relaciones basadas en confianza, respeto y empatía.
+</p>
 
-          <p>
-            Mis arquetipos son <strong>Cuidador</strong> y <strong>Gobernante</strong>. El Cuidador se refleja en mi forma de escuchar, apoyar y
-            generar confianza. El Gobernante se refleja en mi disciplina, mi necesidad de orden y mi enfoque en resultados sin perder el lado humano.
-          </p>
-        </div>
-      </div>
+<p class="expertise">
+Mi enfoque profesional está orientado al área empresarial y a la agilización de procesos. Como futuro Ingeniero Industrial, busco destacar en la optimización de operaciones, la mejora continua y la creación de soluciones eficientes que aporten valor tanto a las organizaciones como a las personas.
+</p>
 
-      <div class="section">
-        <div class="cols">
-          <div class="card">
-            <h2>Habilidades</h2>
-            <ul>
-              <li>Comunicación empática</li>
-              <li>Trabajo en equipo</li>
-              <li>Liderazgo responsable</li>
-              <li>Organización y planificación</li>
-            </ul>
-          </div>
+<div class="home-logo-wrap">
+<img src="logo.png" class="home-logo">
+</div>
 
-          <div class="card">
-            <h2>Fortalezas</h2>
-            <ul>
-              <li>Empatía genuina</li>
-              <li>Honestidad</li>
-              <li>Lealtad</li>
-              <li>Responsabilidad</li>
-            </ul>
-          </div>
-        </div>
+</div>
 
-        <div style="height:16px"></div>
+<div class="card">
+<div class="photo">
+<img src="foto.jpg">
+</div>
+</div>
 
-        <div class="card">
-          <h2>Cómo actúo en situaciones reales</h2>
-          <ul>
-            <li>En momentos de crisis con gente que quiero y apoyo, soy el último en perder la cabeza y en abandonar el barco.</li>
-            <li>Me definen la empatía y la lealtad: para mí, la confianza se construye y se protege.</li>
-            <li>Escucho, me organizo y apoyo en todo lo que haga falta para que el equipo avance.</li>
-            <li>Comprendo a las personas y sé cómo actuar con cada una para apoyarlas y ganarme su atención.</li>
-            <li>Soy responsable, calmado y trabajador; considero varias ideas y sé trabajar en equipo.</li>
-          </ul>
-        </div>
+</div>
 
-        <div style="height:16px"></div>
+</section>
 
-        <div class="card">
-          <h2>Mi propuesta profesional</h2>
-          <p>
-            Ofrezco una forma de trabajo basada en valores, compromiso y responsabilidad, enfocada en generar confianza y relaciones sólidas a largo plazo.
-            Busco aportar soluciones con una visión humana y profesional, trabajando con disciplina, respeto y orientación al éxito.
-          </p>
-        </div>
-      </div>
-    </section>
+<section id="sobre" class="page">
 
-    <!-- PORTAFOLIO -->
-    <section id="portafolio" class="page" aria-label="Portafolio">
-      <div class="hero">
-        <div class="card">
-          <div class="kicker">Portafolio</div>
-          <h1>Portafolio</h1>
-          <p>
-            Esta sección está visible en el menú según la estructura requerida. En futuras entregas incluiré proyectos, trabajos y resultados relevantes.
-          </p>
-        </div>
-      </div>
-    </section>
+<div class="card">
 
-    <!-- BLOG (COMPLETO) -->
-    <section id="blog" class="page blog" aria-label="Blog">
-      <div class="hero">
-        <div class="card">
-          <div class="kicker">Blog</div>
-          <h1>Cómo soy como marca</h1>
-          <p class="meta">David Pardo · <span id="today"></span></p>
+<div class="kicker">Sobre mí</div>
 
-          <p>
-            Mi marca personal se construye a partir de una idea simple: <strong>crecer profesionalmente sin dejar de ser humano</strong>.
-            Para mí, la forma en la que trato a las personas, cómo respondo bajo presión y cómo sostengo la confianza en equipo es lo que define mi reputación.
-          </p>
+<h1>Mi marca personal: liderazgo humano con visión estratégica.</h1>
 
-          <p>
-            Mis arquetipos son <strong>Cuidador</strong> y <strong>Gobernante</strong>. Como Cuidador, me importa el bienestar del equipo:
-            escucho, apoyo y busco generar un ambiente donde la gente se sienta valorada. Como Gobernante, me enfoco en el orden, la planificación y la responsabilidad:
-            me gusta trabajar con estructura, claridad y metas, cuidando el proceso sin descuidar los resultados.
-          </p>
+<p>
+A lo largo de mi formación y de las experiencias que he tenido trabajando con otras personas, he descubierto que mi forma de liderar nace desde la empatía y la organización. Me considero alguien cercano, responsable y comprometido, capaz de mantener la calma bajo presión y de trabajar buscando siempre soluciones eficientes y humanas.
+</p>
 
-          <p>
-            Actualmente estudio <strong>Ingeniería Industrial en la Universidad del Valle de Guatemala</strong>. Me interesa fortalecer mi perfil con una visión estratégica,
-            por lo que al graduarme planeo estudiar una <strong>maestría en Finanzas</strong>. Considero que esa combinación me permitirá tomar decisiones con mayor criterio,
-            analizar mejor los recursos y contribuir con soluciones que sean humanas, eficientes y sostenibles.
-          </p>
+<p>
+Mis arquetipos de marca son el Cuidador y el Gobernante. El Cuidador se refleja en mi capacidad de escuchar, apoyar y construir relaciones de confianza. El Gobernante representa mi disciplina, visión estratégica y orientación a resultados, especialmente en entornos relacionados con procesos, liderazgo y toma de decisiones.
+</p>
 
-          <p>
-            En situaciones de crisis, especialmente cuando se trata de personas que aprecio y apoyo, suelo mantener la calma. Soy el último en perder la cabeza y en abandonar el barco.
-            Prefiero escuchar, ordenar ideas, evaluar opciones y aportar claridad para que el equipo avance. Esa forma de actuar es parte central de cómo quiero que se recuerde mi marca:
-            confiable, leal y enfocada en soluciones.
-          </p>
+<p>
+Mi objetivo profesional es crecer en áreas empresariales, financieras y de optimización de procesos, desarrollando proyectos que aporten valor real a las organizaciones y a las personas que forman parte de ellas.
+</p>
 
-          <p>
-            También creo que una marca se demuestra con consistencia. Por eso intento ser responsable, trabajador y abierto a distintas ideas. Me tomo en serio el trabajo en equipo
-            y me esfuerzo por aportar organización, apoyo y criterio. Mi objetivo es que la gente vea en mí a alguien con valores, compromiso y capacidad de liderazgo.
-          </p>
+<div class="cols">
 
-          <hr class="divider">
+<div class="card">
+<h2>Habilidades</h2>
 
-          <p>
-            En resumen, quiero que mi marca combine dos cosas: <strong>cercanía</strong> (confianza, empatía y apoyo real) y <strong>dirección</strong>
-            (orden, visión, responsabilidad y resultados).
-          </p>
-        </div>
-      </div>
-    </section>
+<ul>
+<li>Comunicación empática</li>
+<li>Trabajo en equipo</li>
+<li>Liderazgo responsable</li>
+<li>Organización y planificación</li>
+<li>Análisis de procesos</li>
+<li>Resolución de problemas</li>
+</ul>
+</div>
 
-    <!-- CONTACTO -->
-    <section id="contacto" class="page" aria-label="Contacto">
-      <div class="hero">
-        <div class="card">
-          <div class="kicker">Contacto</div>
-          <h1>Contacto</h1>
-          <p>
-            Esta sección está visible en el menú según la estructura requerida. En el futuro puedo integrar un formulario real o enlaces de contacto.
-          </p>
+<div class="card">
+<h2>Fortalezas</h2>
 
-          <form onsubmit="return fakeSubmit(event)">
-            <label for="name">Nombre</label>
-            <input id="name" name="name" type="text" placeholder="Tu nombre" required>
+<ul>
+<li>Empatía genuina</li>
+<li>Responsabilidad</li>
+<li>Disciplina</li>
+<li>Lealtad</li>
+<li>Adaptabilidad</li>
+<li>Pensamiento estratégico</li>
+</ul>
+</div>
 
-            <label for="email">Correo</label>
-            <input id="email" name="email" type="email" placeholder="tu@correo.com" required>
+</div>
 
-            <label for="msg">Mensaje</label>
-            <textarea id="msg" name="msg" placeholder="Escribe tu mensaje..." required></textarea>
+<div class="video-box">
 
-            <button class="btn" type="submit">Enviar</button>
-            <div id="formHint" style="display:none; margin-top:10px; color:var(--muted); font-size:13px;">
-              Formulario demostrativo (no envía correos).
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
+<h2>Presentación profesional</h2>
 
-    <footer>
-      © <span id="year"></span> David Pardo
-    </footer>
+<p>
+A continuación presento un video donde comparto mi visión profesional, mis intereses y la forma en la que busco aportar valor dentro de un equipo y una organización.
+</p>
 
-  </main>
+<video controls>
+<source src="video.mp4" type="video/mp4">
+</video>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-    const fmt = new Intl.DateTimeFormat("es-ES", { year:"numeric", month:"long", day:"2-digit" });
-    document.getElementById("today").textContent = fmt.format(new Date());
+</div>
 
-    function showPage(id){
-      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-      const target = document.getElementById(id);
-      if(target) target.classList.add("active");
+<div class="cv-section">
 
-      const links = document.querySelectorAll(".menu .navlink");
-      links.forEach(a => a.classList.remove("active"));
+<h2>Currículum Vitae</h2>
 
-      const ids = ["home","sobre","portafolio","blog","contacto"];
-      const idx = ids.indexOf(id);
-      if(idx >= 0) links[idx].classList.add("active");
+<div class="cv-box">
 
-      window.scrollTo(0,0);
-    }
+<div class="cv-photo">
+<img src="foto.jpg">
+</div>
 
-    function fakeSubmit(e){
-      e.preventDefault();
-      document.getElementById("formHint").style.display = "block";
-      return false;
-    }
-  </script>
+<div class="cv-info">
+
+<h3>David Pardo</h3>
+
+<p>
+Estudiante de Ingeniería Industrial con interés en liderazgo estratégico, optimización de procesos, gestión empresarial y finanzas. Experiencia en ventas, control de inventario y participación en proyectos técnicos y de simulación.
+</p>
+
+<p>
+Idiomas: Español e Inglés
+</p>
+
+<a href="cv-david-pardo.pdf" download class="cv-btn">
+Descargar CV
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="portafolio" class="page">
+
+<div class="card">
+
+<div class="kicker">Portafolio</div>
+
+<h1>Proyectos destacados</h1>
+
+<p>
+Estos proyectos representan algunas de las áreas en las que he desarrollado habilidades técnicas, analíticas y de liderazgo durante mi formación académica.
+</p>
+
+</div>
+
+<div class="portfolio-grid">
+
+<div class="project-card">
+
+<div class="project-img">
+<img src="tinkercad.png">
+</div>
+
+<div class="project-content">
+
+<div class="tag">
+Automatización y lógica industrial
+</div>
+
+<h3>Simulación de Planta de Tratamiento de Agua</h3>
+
+<p>
+Proyecto desarrollado en Tinkercad enfocado en la simulación de un proceso industrial simplificado de tratamiento de agua. Se implementó lógica de control utilizando compuertas lógicas, LEDs, resistencias y simulación electrónica para representar válvulas, sensores, mixers y sistemas de emergencia.
+</p>
+
+<p>
+Herramientas utilizadas: Tinkercad, lógica digital, simulación electrónica y análisis de circuitos.
+</p>
+
+</div>
+
+</div>
+
+<div class="project-card">
+
+<div class="project-img">
+<img src="simio.png">
+</div>
+
+<div class="project-content">
+
+<div class="tag">
+Optimización y análisis de procesos
+</div>
+
+<h3>Simulación de Procesos con SIMIO</h3>
+
+<p>
+Proyecto de simulación enfocado en analizar tiempos de atención y comportamiento de clientes en un sistema real. Se utilizaron distribuciones estadísticas, Input Analyzer y modelado en SIMIO para detectar oportunidades de mejora y optimización operativa.
+</p>
+
+<p>
+Herramientas utilizadas: SIMIO, Input Analyzer, análisis estadístico y simulación de procesos.
+</p>
+
+</div>
+
+</div>
+
+<div class="project-card">
+
+<div class="project-content">
+
+<div class="tag">
+Comunicación y análisis crítico
+</div>
+
+<h3>Mesa Redonda sobre Derechos Humanos</h3>
+
+<p>
+Participación en una mesa redonda enfocada en el análisis del Acuerdo Global sobre Derechos Humanos en Guatemala. El proyecto fortaleció habilidades de comunicación, pensamiento crítico, argumentación y trabajo colaborativo.
+</p>
+
+<p>
+Áreas desarrolladas: investigación, exposición oral, análisis social y debate.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="blog" class="page blog">
+
+<div class="card" style="max-width:950px; margin:auto;">
+
+<div class="kicker">Blog</div>
+
+<h1 style="line-height:1.25;">
+Construyendo una marca profesional basada en liderazgo, estrategia y empatía
+</h1>
+
+<p style="margin-top:28px;">
+Mi marca personal se construye a partir de una idea simple:
+<strong>crecer profesionalmente sin dejar de ser humano.</strong>
+Creo que el liderazgo no se trata únicamente de dirigir o alcanzar resultados, sino también de generar confianza, aportar estabilidad y construir relaciones sólidas dentro de cualquier equipo u organización.
+</p>
+
+<p>
+Actualmente estudio Ingeniería Industrial en la
+<a href="https://ave.uvg.edu.gt/" target="_blank">
+Universidad del Valle de Guatemala
+</a>.
+A lo largo de mi formación he descubierto un fuerte interés por el área empresarial, la optimización de procesos y la toma de decisiones estratégicas. Me motiva trabajar en proyectos donde pueda combinar organización, análisis y liderazgo para generar soluciones eficientes y sostenibles.
+</p>
+
+<p>
+Además de mi formación académica, experiencias en ventas, control de inventario y participación en proyectos técnicos me han permitido desarrollar habilidades relacionadas con comunicación, responsabilidad y adaptación a distintos entornos de trabajo. También he aprendido la importancia de mantener la calma bajo presión y de escuchar diferentes perspectivas antes de tomar decisiones.
+</p>
+
+<p>
+Dentro de mis metas profesionales está continuar fortaleciendo mi perfil con una visión estratégica y financiera. Por ello, al finalizar mi carrera me gustaría estudiar una
+<a href="https://www.mundoposgrado.com/master-en-finanzas-e-inversiones-bsbi-univesidad-de-chichester-school-of-business-and-innovation-bsbi/" target="_blank">
+maestría en Finanzas
+</a>,
+ya que considero que el conocimiento financiero complementa de forma importante la gestión empresarial y la capacidad de liderar proyectos de alto impacto.
+</p>
+
+<p>
+También considero fundamental mantener un enfoque humano en cada proyecto. Más allá de los resultados, me interesa construir relaciones basadas en respeto, empatía y compromiso. Quiero que las personas me perciban como alguien confiable, disciplinado y capaz de aportar valor tanto a nivel profesional como personal.
+</p>
+
+<p>
+En el futuro, me gustaría desarrollarme en áreas relacionadas con liderazgo estratégico, mejora de procesos y gestión empresarial, siempre buscando crecer constantemente y generar un impacto positivo en las organizaciones donde participe.
+</p>
+
+</div>
+
+</section>
+
+<section id="contacto" class="page">
+
+<div class="card">
+
+<div class="kicker">Contacto</div>
+
+<h1>Contacto profesional</h1>
+
+<p class="call">
+Estoy abierto a nuevas oportunidades, proyectos y colaboraciones donde pueda aportar liderazgo, organización y visión estratégica.
+</p>
+
+<div class="contact-box">
+
+<div class="contact-card">
+
+<p>
+<strong>Correo:</strong><br>
+<a href="mailto:pardodavid01gt@gmail.com">
+pardodavid01gt@gmail.com
+</a>
+</p>
+
+<p>
+<strong>LinkedIn:</strong><br>
+<a href="https://www.linkedin.com/in/david-pardo01" target="_blank">
+www.linkedin.com/in/david-pardo01
+</a>
+</p>
+
+<p>
+<strong>Teléfono:</strong><br>
++(502) 4904-6767
+</p>
+
+<p>
+<strong>Ubicación:</strong><br>
+Guatemala, Guatemala
+</p>
+
+</div>
+
+<div class="contact-photo">
+<img src="foto.jpg">
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 David Pardo
+</footer>
+
+</main>
+
+<script>
+
+function showPage(id){
+
+document.querySelectorAll(".page").forEach(page=>{
+page.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll(".navlink").forEach(link=>{
+link.classList.remove("active");
+});
+
+const pages=["home","sobre","portafolio","blog","contacto"];
+
+const index=pages.indexOf(id);
+
+document.querySelectorAll(".navlink")[index].classList.add("active");
+
+window.scrollTo(0,0);
+
+}
+
+</script>
+
 </body>
 </html>
